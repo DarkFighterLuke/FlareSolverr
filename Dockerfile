@@ -11,7 +11,7 @@ RUN apk update && \
     rm -Rf /var/cache
 
 # Copy FlareSolverr code
-USER node
+#USER node
 RUN mkdir -p /home/node/flaresolverr
 WORKDIR /home/node/flaresolverr
 COPY --chown=node:node package.json package-lock.json tsconfig.json ./
@@ -29,6 +29,3 @@ RUN npm install && \
 EXPOSE 8191
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["node", "./dist/server.js"]
-
-# docker build -t flaresolverr:custom .
-# docker run -p 8191:8191 -e LOG_LEVEL=debug flaresolverr:custom
