@@ -26,6 +26,9 @@ RUN npm install && \
     npm prune --production && \
     rm -rf /home/node/.npm
 
+ADD init.sh /
+
 EXPOSE 8191
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD ["node", "./dist/server.js"]
+CMD ["sh", "-c", "chmod +x /init.sh && /init.sh && exec node ./dist/server.js"]
+#CMD ["node", "./dist/server.js"]
